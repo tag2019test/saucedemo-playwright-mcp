@@ -83,3 +83,4 @@ The workflow in `.github/workflows/playwright.yml`:
 
 Credentials (`USERNAME` and `PASSWORD`) should be provided via GitHub secrets `SAUCEDEMO_USERNAME` and `SAUCEDEMO_PASSWORD`.
 
+test 1
