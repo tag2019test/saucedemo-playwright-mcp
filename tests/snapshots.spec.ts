@@ -16,6 +16,10 @@ test.describe('Snapshot examples', () => {
   });
 
   test('inventory page visual snapshot', async ({ page }) => {
+    // Running through Selenium Grid can introduce minor rendering differences,
+    // so skip this visual regression when SELENIUM_REMOTE_URL is set.
+    test.skip(!!process.env.SELENIUM_REMOTE_URL, 'Visual snapshot is disabled on Selenium Grid');
+
     const env = getTestEnvironment();
     const loginPage = new LoginPage(page);
     const inventoryPage = new InventoryPage(page);
