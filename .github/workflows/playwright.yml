@@ -27,7 +27,7 @@ jobs:
 
       - name: Run Playwright tests
         env:
-          BASE_URL: https://www.saucedemo.com
+          BASE_URL: ${{ secrets.BASE_URL }}
           USERNAME: ${{ secrets.SAUCEDEMO_USERNAME }}
           PASSWORD: ${{ secrets.SAUCEDEMO_PASSWORD }}
         run: npx playwright test

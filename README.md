@@ -81,6 +81,10 @@ The workflow in `.github/workflows/playwright.yml`:
 - runs the test suite
 - uploads the HTML report as an artifact
 
-Credentials (`USERNAME` and `PASSWORD`) should be provided via GitHub secrets `SAUCEDEMO_USERNAME` and `SAUCEDEMO_PASSWORD`.
+Credentials and configuration should be provided via GitHub **repository secrets**:
 
-test 1
+- `BASE_URL` – e.g. `https://www.saucedemo.com`
+- `SAUCEDEMO_USERNAME` – mapped to `USERNAME` in the workflow env
+- `SAUCEDEMO_PASSWORD` – mapped to `PASSWORD` in the workflow env
+
+In your GitHub repo go to **Settings → Secrets and variables → Actions**, then create these three secrets with the appropriate values. On each push or pull request to `main`/`master`, the workflow will inject them into the environment and run the tests using those values.
