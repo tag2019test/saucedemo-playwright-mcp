@@ -1,0 +1,38 @@
+name: Playwright Tests - Selenium Grid
+
+on:
+  workflow_dispatch:
+
+jobs:
+  selenium-grid:
+    runs-on: ubuntu-latest
+
+    services:
+      selenium:
+        image: selenium/standalone-chromium:latest
+        ports:
+          - 4444:4444
+        options: >-
+          --shm-size="2g"
+          -e SE_NODE_GRID_URL="http://localhost:4444"
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: lts/*
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run Playwright tests against Selenium Grid
+        env:
+          BASE_URL: ${{ secrets.BASE_URL }}
+          USERNAME: ${{ secrets.SAUCEDEMO_USERNAME }}
+          PASSWORD: ${{ secrets.SAUCEDEMO_PASSWORD }}
+          SELENIUM_REMOTE_URL: http://localhost:4444
+        run: npx playwright test
+
